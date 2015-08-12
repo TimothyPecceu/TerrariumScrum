@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>Terrarium</h1>
+	
 	<c:forEach items="${terrarium}" var="entry">
 		Key = ${entry.key.xLocatie}, <img src=<c:url value="/images/${entry.value}.png" /> title="${entry.value}"/><br>
 	</c:forEach>
