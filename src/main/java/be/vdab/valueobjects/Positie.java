@@ -50,5 +50,11 @@ public class Positie {
 		return yLocatie*10+xLocatie;
 	}
 	
+	@Override
+	public String toString(){
+		return xLocatie + "," + yLocatie;
+		
+	}
+	
 	
 }

@@ -74,6 +74,10 @@ public class Terrarium {
 	public Set<Organisme> getTerrarium() {
 		return new HashSet<>(terrarium.values());
 	}
+	
+	public Map<Positie,Organisme> getTerrariumMap(){
+		return terrarium;
+	}
 
 	public void organismeToevoegen(Organisme organisme) {
 		if (getTerrarium().size() < (BREEDTE*HOOGTE)) {

@@ -19,4 +19,9 @@ public abstract class Organisme {
 	public abstract void carnivoorInteractie(Carnivoor carnivoor);
 
 	public abstract void herbivoorInteractie(Herbivoor herbivoor);
+	
+	@Override
+	public String toString(){
+		return this.getClass().getSimpleName();
+	}
 }
