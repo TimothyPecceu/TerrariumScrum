@@ -3,7 +3,9 @@ package be.vdab.entities;
 import be.vdab.valueobjects.Positie;
 
 public abstract class Organisme {
-
+	
+	private Terrarium terrarium;
+	
 	private Positie positie;
 	
 	public Positie getPositie() {
@@ -24,4 +26,14 @@ public abstract class Organisme {
 	public String toString(){
 		return this.getClass().getSimpleName();
 	}
+	
+	public void setTerrarium(Terrarium terrarium){
+		this.terrarium=terrarium;
+	}
+
+	public Terrarium getTerrarium() {
+		return terrarium;
+	}
+	
+	
 }

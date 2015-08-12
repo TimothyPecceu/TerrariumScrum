@@ -14,13 +14,14 @@ public class HerbivoorTest {
 	Terrarium terrarium;
 	@Before
 	public void before(){
-		herbivoorLinks= new Herbivoor();
-		terrarium = Terrarium.getInstance();
+		terrarium = new Terrarium();
+		herbivoorLinks= new Herbivoor(terrarium);
+		
 	}
 	
 	@Test
 	public void LevenskrachtVanHerbivoorDiePlantEetStijgtMet1(){
-		Plant plant = new Plant();
+		Plant plant = new Plant(terrarium);
 		terrarium.organismeToevoegen(plant);
 		int levenskrachtHerbivoor= herbivoorLinks.getLevenskracht()+1;
 		herbivoorLinks.actie(plant);
@@ -30,7 +31,7 @@ public class HerbivoorTest {
 	@Test
 	public void eenHerbivoorNaastEenCarnivoorDoetNiets(){
 		Positie positieHerbivoor = herbivoorLinks.getPositie();
-		herbivoorLinks.actie(new Carnivoor());
+		herbivoorLinks.actie(new Carnivoor(terrarium));
 		assertEquals(positieHerbivoor, herbivoorLinks.getPositie());
 	}
 	
@@ -39,16 +40,16 @@ public class HerbivoorTest {
 		terrarium.clearTerrarium();
 		terrarium.organismeToevoegen(herbivoorLinks);
 		int aantal = terrarium.getTerrarium().size()+1;
-		herbivoorLinks.actie(new Herbivoor());
+		herbivoorLinks.actie(new Herbivoor(terrarium));
 		assertEquals(aantal, terrarium.getTerrarium().size());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void eenHerbivoorKanGeenKinderenKrijgenInEenVolTerrarium(){
 		for(int i = 0; i != 36; i++){
-			terrarium.organismeToevoegen(new Herbivoor());
+			terrarium.organismeToevoegen(new Herbivoor(terrarium));
 		}
-		herbivoorLinks.actie(new Herbivoor());
+		herbivoorLinks.actie(new Herbivoor(terrarium));
 	}
 	
 	@Test

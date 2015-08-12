@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel='stylesheet' href=<c:url value="/styles/default.css"/>>
 <title>Terrarium</title>
 </head>
 <body>
 	<h1>Terrarium</h1>
 	<c:forEach items="${terrarium}" var="entry">
-		Key = ${entry.key.xLocatie}, value = ${entry.value}<br>
+		Key = ${entry.key.xLocatie}, <img src=<c:url value="/images/${entry.value}.png" /> title="${entry.value}"/><br>
 	</c:forEach>
 	<form>
 		<input type="submit" value="volgende dag" name="volgendeDag" />

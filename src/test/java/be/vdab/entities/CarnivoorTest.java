@@ -15,8 +15,8 @@ public class CarnivoorTest {
 
 	@Before
 	public void before() {
-		carnivoorLinks = new Carnivoor();
-		terrarium = Terrarium.getInstance();
+		terrarium = new Terrarium();
+		carnivoorLinks = new Carnivoor(terrarium);		
 		terrarium.organismeToevoegen(carnivoorLinks);
 	}
 
@@ -28,13 +28,13 @@ public class CarnivoorTest {
 	@Test
 	public void tweeEvenSterkeCarnivorenVechtenErVeranderdNiets() {
 		int levenkrachtCarnivoorLinks = carnivoorLinks.getLevenskracht();
-		carnivoorLinks.actie(new Carnivoor());
+		carnivoorLinks.actie(new Carnivoor(terrarium));
 		assertEquals(levenkrachtCarnivoorLinks, carnivoorLinks.getLevenskracht());
 	}
 	
 	@Test
 	public void levenskrachtCarnivoorGaatOmhoogMetLevenskrachtHerbivoor(){
-		Herbivoor herbivoor = new Herbivoor();
+		Herbivoor herbivoor = new Herbivoor(terrarium);
 		terrarium.organismeToevoegen(herbivoor);
 		int levenskrachtCarnivoor = carnivoorLinks.getLevenskracht()+herbivoor.getLevenskracht();
 		carnivoorLinks.actie(herbivoor);
@@ -44,7 +44,7 @@ public class CarnivoorTest {
 	@Test
 	public void levenskrachtCarnivoorGaatOmhoogMetLevenskrachtZwakkereCarnivoor(){		
 		terrarium.organismeToevoegen(carnivoorLinks);
-		Carnivoor carnivoorRechts = new Carnivoor();
+		Carnivoor carnivoorRechts = new Carnivoor(terrarium);
 		terrarium.organismeToevoegen(carnivoorRechts);
 		carnivoorLinks.verhoogLevenskracht(2);
 		carnivoorRechts.verhoogLevenskracht(1);
@@ -56,7 +56,7 @@ public class CarnivoorTest {
 	@Test
 	public void eenCarnivoorNaastEenPlantDoetNiets(){
 		Positie positieCarnivoor = carnivoorLinks.getPositie();
-		carnivoorLinks.actie(new Plant());
+		carnivoorLinks.actie(new Plant(terrarium));
 		assertEquals(positieCarnivoor, carnivoorLinks.getPositie());
 	}
 	

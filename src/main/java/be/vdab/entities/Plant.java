@@ -4,7 +4,8 @@ import be.vdab.valueobjects.Positie;
 
 public class Plant extends Organisme {
 
-	public Plant(){
+	public Plant(Terrarium terrarium){
+		setTerrarium(terrarium);
 		setPositie(new Positie());
 	}
 	
@@ -23,7 +24,7 @@ public class Plant extends Organisme {
 
 	private void wordGegeten(Herbivoor herbivoor) {
 		herbivoor.verhoogLevenskracht(1);
-		Terrarium.getInstance().organismeVerwijderen(this.getPositie());
+		getTerrarium().organismeVerwijderen(this.getPositie());
 	}
 
 }

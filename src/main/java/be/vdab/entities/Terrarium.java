@@ -11,41 +11,32 @@ import be.vdab.valueobjects.Positie;
 
 public class Terrarium {
 
-	private static Terrarium uniqueInstance;
 	private Map<Positie, Organisme> terrarium;
 	private int dag;
 	private boolean vol;
 	private static final int HOOGTE = 6;
 	private static final int BREEDTE = 6;
 	
-	private Terrarium() {
+	public Terrarium() {
 		terrarium = new HashMap<>();
 
 		int random = new Random().nextInt(3) + 1;
 		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Plant());
+			organismeToevoegen(new Plant(this));
 		}
 
 		random = new Random().nextInt(3) + 1;
 		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Herbivoor());
+			organismeToevoegen(new Herbivoor(this));
 		}
 
 		random = new Random().nextInt(3) + 1;  
 		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Carnivoor());
+			organismeToevoegen(new Carnivoor(this));
 		}
 		dag = 1;
 		vol = false;
-	}
-
-	public static Terrarium getInstance() {
-		if (uniqueInstance == null) {
-			uniqueInstance = new Terrarium();
-		}
-
-		return uniqueInstance;
-	}
+	}	
 
 	public void volgendeDag() {
 
@@ -63,7 +54,7 @@ public class Terrarium {
 		int random = new Random().nextInt(3) + 1;
 		for (int i = 0; i != random; i++) {
 			try {
-				organismeToevoegen(new Plant());
+				organismeToevoegen(new Plant(this));
 			} catch (IllegalArgumentException ex) {
 				vol = true;
 			}
@@ -84,7 +75,7 @@ public class Terrarium {
 			if (terrarium.get(organisme.getPositie()) == null) {
 				terrarium.put(organisme.getPositie(), organisme);
 			} else {
-				while (!Terrarium.getInstance().isLeeg(organisme.getPositie())) {
+				while (!isLeeg(organisme.getPositie())) {
 					organisme.setPositie(new Positie());
 				}
 				terrarium.put(organisme.getPositie(), organisme);

@@ -18,7 +18,7 @@ public abstract class Dier extends Organisme {
 	public void stap() {
 		Richting[] alleRichtingen = Richting.values();
 		Positie positie = new Positie(this.getPositie().getyLocatie(), this.getPositie().getxLocatie());
-		Terrarium terrarium = Terrarium.getInstance();
+		Terrarium terrarium = getTerrarium();
 		
 		while (positie.equals(getPositie())){
 			Richting randomRichting = alleRichtingen[new Random().nextInt(alleRichtingen.length)];

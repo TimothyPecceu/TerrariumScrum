@@ -11,7 +11,7 @@ public class TerrariumTest {
 
 	@Before
 	public void before() {
-		terrarium = Terrarium.getInstance();
+		terrarium = new Terrarium();
 	}
 
 	@Test
@@ -22,25 +22,25 @@ public class TerrariumTest {
 	@Test
 	public void plantToevoegenIsGelukt(){
 		terrarium.clearTerrarium();
-		terrarium.organismeToevoegen(new Plant());
+		terrarium.organismeToevoegen(new Plant(terrarium));
 	}
 	
 	@Test
 	public void herbivoorToevoegenIsGelukt(){
 		terrarium.clearTerrarium();
-		terrarium.organismeToevoegen(new Herbivoor());
+		terrarium.organismeToevoegen(new Herbivoor(terrarium));
 	}
 	
 	@Test
 	public void carnivoorToevoegenIsGelukt(){
 		terrarium.clearTerrarium();
-		terrarium.organismeToevoegen(new Carnivoor());
+		terrarium.organismeToevoegen(new Carnivoor(terrarium));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void terrariumKanMaximumZessenDertigOrganismenBevatten(){
 		for(int i=0; i != 37;i++){
-			terrarium.organismeToevoegen(new Plant());
+			terrarium.organismeToevoegen(new Plant(terrarium));
 		}
 	}
 	

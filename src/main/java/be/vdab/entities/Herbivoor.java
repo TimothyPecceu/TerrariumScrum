@@ -4,7 +4,8 @@ import be.vdab.valueobjects.Positie;
 
 public class Herbivoor extends Dier {
 
-	public Herbivoor() {
+	public Herbivoor(Terrarium terrarium) {
+		setTerrarium(terrarium);
 		setPositie(new Positie());
 	}
 
@@ -17,13 +18,13 @@ public class Herbivoor extends Dier {
 	}
 
 	private void herbivoorVrijtHerbivoor(Herbivoor herbivoor) {	
-			Herbivoor nieuweHerbivoor = new Herbivoor();
-			Terrarium.getInstance().organismeToevoegen(nieuweHerbivoor);
+			Herbivoor nieuweHerbivoor = new Herbivoor(getTerrarium());
+			getTerrarium().organismeToevoegen(nieuweHerbivoor);
 	}
 
 	public void herbivoorWordtGegeten(Carnivoor carnivoor) {
 		carnivoor.verhoogLevenskracht(this.getLevenskracht());
-		Terrarium.getInstance().organismeVerwijderen(this.getPositie());
+		getTerrarium().organismeVerwijderen(this.getPositie());
 	}
 
 	@Override
