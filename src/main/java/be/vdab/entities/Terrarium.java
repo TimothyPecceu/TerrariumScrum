@@ -148,6 +148,5 @@ public class Terrarium {
 	public static int getBreedte() {
 		return breedte;
 	}
-
 	
 }

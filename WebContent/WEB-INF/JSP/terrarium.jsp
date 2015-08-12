@@ -35,6 +35,8 @@
 	</form>
 	<form method="post">
 		<input type="submit" value="Nieuw Terrarium">
+		<input type="text" name="breedte" placeholder="Breedte" value="${terrarium.breedte}"/>
+		<input type="text" name="hoogte" placeholder="Hoogte" value="${terrarium.hoogte}"/>
 	</form>
 </body>
 </html>
