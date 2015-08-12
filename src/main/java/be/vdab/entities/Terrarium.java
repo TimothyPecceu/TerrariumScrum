@@ -100,18 +100,26 @@ public class Terrarium {
 	public boolean isLeeg(Positie positie) {
 		return !terrarium.containsKey(positie);
 	}
+	
+	public int getDag() {
+		return dag;
+	}
+
+	public Organisme[][] getOrganismes(){
+		Organisme[][] weergave = new Organisme[BREEDTE][HOOGTE];
+		for (Entry<Positie, Organisme> entry : terrarium.entrySet()) {
+			weergave[entry.getKey().getyLocatie()][entry.getKey().getxLocatie()] = entry.getValue();
+		}
+		return weergave;
+	}
 
 	public void clearTerrarium() {
 		terrarium.clear();
 	}
 
 	public void printTerrarium() {
-		Organisme[][] weergave = new Organisme[BREEDTE][HOOGTE];
-
-		for (Entry<Positie, Organisme> entry : terrarium.entrySet()) {
-			weergave[entry.getKey().getyLocatie()][entry.getKey().getxLocatie()] = entry.getValue();
-		}
-
+		
+		Organisme[][] weergave = getOrganismes();
 		System.out.println("Dag: " + dag);
 		System.out.println("--------------------");
 		for (int y = 0; y != HOOGTE; y++) {

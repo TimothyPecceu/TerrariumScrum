@@ -31,13 +31,22 @@ public class TerrariumServlet extends HttpServlet {
 		if (session.getAttribute("terrarium") == null) {
 			session.setAttribute("terrarium", new Terrarium());
 		}
-		terrarium = (Terrarium) session.getAttribute("terrarium");
-
-		request.setAttribute("terrarium", terrarium.getTerrariumMap());
+		terrarium = (Terrarium) session.getAttribute("terrarium");		
 		String volgendeDag = request.getParameter("volgendeDag");
-		terrarium.volgendeDag();
-		request.setAttribute("terrarium", terrarium.getTerrariumMap());
+		if(volgendeDag != null){
+			terrarium.volgendeDag();
+		}		
+		request.setAttribute("terrarium", terrarium);
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		response.sendRedirect(response.encodeRedirectURL(request.getRequestURI()));
+	}
+	
+	
 
 }
