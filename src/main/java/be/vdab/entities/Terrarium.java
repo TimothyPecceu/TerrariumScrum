@@ -14,10 +14,10 @@ public class Terrarium {
 	private Map<Positie, Organisme> terrarium;
 	private int dag;
 	private boolean vol;
-	private static final int HOOGTE = 6;
-	private static final int BREEDTE = 6;
+	private static int hoogte = 6;
+	private static int breedte = 6;
 	
-	public Terrarium() {
+	public Terrarium(int hoogte, int breedte) {
 		terrarium = new HashMap<>();
 
 		int random = new Random().nextInt(3) + 1;
@@ -36,12 +36,14 @@ public class Terrarium {
 		}
 		dag = 1;
 		vol = false;
+		Terrarium.hoogte = hoogte;
+		Terrarium.breedte = breedte;
 	}	
 
 	public void volgendeDag() {
 
 		for (Organisme organisme : getTerrarium()) {
-			if (organisme.getPositie().getxLocatie() < (BREEDTE-1)) {
+			if (organisme.getPositie().getxLocatie() < (breedte-1)) {
 				Positie pos = new Positie(organisme.getPositie().getyLocatie(),
 						organisme.getPositie().getxLocatie() + 1);
 				try {
@@ -71,7 +73,7 @@ public class Terrarium {
 	}
 
 	public void organismeToevoegen(Organisme organisme) {
-		if (getTerrarium().size() < (BREEDTE*HOOGTE)) {
+		if (getTerrarium().size() < (breedte*hoogte)) {
 			if (terrarium.get(organisme.getPositie()) == null) {
 				terrarium.put(organisme.getPositie(), organisme);
 			} else {
@@ -106,7 +108,7 @@ public class Terrarium {
 	}
 
 	public Organisme[][] getOrganismes(){
-		Organisme[][] weergave = new Organisme[BREEDTE][HOOGTE];
+		Organisme[][] weergave = new Organisme[breedte][hoogte];
 		for (Entry<Positie, Organisme> entry : terrarium.entrySet()) {
 			weergave[entry.getKey().getyLocatie()][entry.getKey().getxLocatie()] = entry.getValue();
 		}
@@ -122,9 +124,9 @@ public class Terrarium {
 		Organisme[][] weergave = getOrganismes();
 		System.out.println("Dag: " + dag);
 		System.out.println("--------------------");
-		for (int y = 0; y != HOOGTE; y++) {
+		for (int y = 0; y != hoogte; y++) {
 			System.out.println(' ');
-			for (int x = 0; x != BREEDTE; x++) {
+			for (int x = 0; x != breedte; x++) {
 				if (weergave[y][x] != null) {
 					System.out.print(weergave[y][x].getClass().getSimpleName().charAt(0) + " ");
 				} else {
@@ -140,11 +142,11 @@ public class Terrarium {
 	}
 
 	public static int getHoogte() {
-		return HOOGTE;
+		return hoogte;
 	}
 
 	public static int getBreedte() {
-		return BREEDTE;
+		return breedte;
 	}
 
 	

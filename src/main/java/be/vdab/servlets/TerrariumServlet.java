@@ -27,26 +27,34 @@ public class TerrariumServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		int hoogte = 0;
+		int breedte = 0;
+		
 		HttpSession session = request.getSession();
-		if (session.getAttribute("terrarium") == null) {
-			session.setAttribute("terrarium", new Terrarium());
+		if (request.getParameter("hoogte") != null) {
+			hoogte = Integer.parseInt(request.getParameter("hoogte"));
 		}
-		terrarium = (Terrarium) session.getAttribute("terrarium");		
+		if (request.getParameter("breedte") != null) {
+			breedte = Integer.parseInt(request.getParameter("breedte"));
+		}
+		if (session.getAttribute("terrarium") == null) {
+			session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
+		}
+		terrarium = (Terrarium) session.getAttribute("terrarium");
 		String volgendeDag = request.getParameter("volgendeDag");
-		if(volgendeDag != null){
+		if (volgendeDag != null) {
 			terrarium.volgendeDag();
-		}		
+		}
 		request.setAttribute("terrarium", terrarium);
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		response.sendRedirect(response.encodeRedirectURL(request.getRequestURI()));
 	}
-	
-	
 
 }

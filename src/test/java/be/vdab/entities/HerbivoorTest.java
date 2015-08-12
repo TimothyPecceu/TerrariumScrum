@@ -14,7 +14,7 @@ public class HerbivoorTest {
 	Terrarium terrarium;
 	@Before
 	public void before(){
-		terrarium = new Terrarium();
+		terrarium = new Terrarium(6,6);
 		herbivoorLinks= new Herbivoor(terrarium);
 		
 	}
