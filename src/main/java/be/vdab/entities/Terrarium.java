@@ -31,7 +31,7 @@ public class Terrarium {
 			organismeToevoegen(new Herbivoor());
 		}
 
-		random = new Random().nextInt(3) + 1;
+		random = new Random().nextInt(3) + 1;  
 		for (int i = 0; i != random; i++) {
 			organismeToevoegen(new Carnivoor());
 		}
