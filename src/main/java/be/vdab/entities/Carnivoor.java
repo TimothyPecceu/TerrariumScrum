@@ -37,4 +37,10 @@ public class Carnivoor extends Dier {
 	public void herbivoorInteractie(Herbivoor herbivoor) {
 	}
 
+	@Override
+	public void mensInteractie(Mens mens) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
