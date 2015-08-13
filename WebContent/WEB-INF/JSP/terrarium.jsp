@@ -12,6 +12,9 @@
 <body>
 	<h1>Terrarium</h1>
 	<h2>Dag ${terrarium.dag}</h2>
+	<form method="get">
+		<input type="submit" value="volgende dag" name="volgendeDag" />
+	</form>
 	<table>
 
 		<c:forEach items="${terrarium.organismes}" var="organismes">
@@ -20,11 +23,13 @@
 
 					<c:choose>
 						<c:when test="${not empty organisme}">
-							<td><div class="image"><img class='vak'
-								src=<c:url value="/images/${organisme}.png"/>>
-								<c:if test="${organisme.levenskracht > 0}">
-								<span class='levenskracht'><c:out value="${organisme.levenskracht}"/></span>
-								</c:if></div></td>
+							<td><div class="image">
+									<img class='vak' src=<c:url value="/images/${organisme}.png"/>>
+									<c:if test="${organisme.levenskracht > 0}">
+										<span class='levenskracht'><c:out
+												value="${organisme.levenskracht}" /></span>
+									</c:if>
+								</div></td>
 						</c:when>
 						<c:otherwise>
 							<td><img class='vak' src=<c:url value="/images/aarde.jpg"/>></td>
@@ -32,21 +37,19 @@
 					</c:choose>
 
 				</c:forEach>
-			</tr>	
+			</tr>
 		</c:forEach>
 
 	</table>
-	<form method="get">
-		<input type="submit" value="volgende dag" name="volgendeDag" />
-	</form>
 	<form method="post">
 
 		<label> <input type="number" name="breedteNieuw"
 			placeholder="Breedte" required autocomplete='off' /><span
 			class='fout'>${fouten.breedte}</span>
 		</label><br> <label><input type="number" name="hoogteNieuw"
-			placeholder="Hoogte" required autocomplete='off' /><span class='fout'>${fouten.hoogte}</span></label><br>
-		<input type="submit" value="Nieuw Terrarium">
+			placeholder="Hoogte" required autocomplete='off' /><span
+			class='fout'>${fouten.hoogte}</span></label><br> <input type="submit"
+			value="Nieuw Terrarium">
 	</form>
 </body>
 </html>
