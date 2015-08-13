@@ -46,10 +46,7 @@
 		<label> <input type="number" name="breedteNieuw"
 			placeholder="Breedte" required autocomplete='off' /><span
 			class='fout'>${fouten.breedte}</span>
-		</label><br> <label><input type="number" name="hoogteNieuw"
-			placeholder="Hoogte" required autocomplete='off' /><span
-			class='fout'>${fouten.hoogte}</span></label><br> <input type="submit"
-			value="Nieuw Terrarium">
+		</label><br> <label><input type="number" name="hoogteNieuw"></label>
 	</form>
 </body>
 </html>
