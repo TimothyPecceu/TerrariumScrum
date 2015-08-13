@@ -34,7 +34,18 @@ public class TerrariumServlet extends HttpServlet {
 		if (session.getAttribute("terrarium") == null) {
 			int breedte = Integer.parseInt(request.getParameter("breedte"));
 			int hoogte = Integer.parseInt(request.getParameter("hoogte"));
-			session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
+			if (request.getParameter("aantalPlanten") != null && request.getParameter("aantalHerbivoren") != null
+					&& request.getParameter("aantalCarnivoren") != null
+					&& request.getParameter("aantalMensen") != null) {				
+				int aantalPlanten = Integer.parseInt(request.getParameter("aantalPlanten"));
+				int aantalHerbivoren = Integer.parseInt(request.getParameter("aantalHerbivoren"));
+				int aantalCarnivoren = Integer.parseInt(request.getParameter("aantalCarnivoren"));
+				int aantalMensen = Integer.parseInt(request.getParameter("aantalMensen"));
+				session.setAttribute("terrarium", new Terrarium(hoogte, breedte, aantalPlanten,aantalHerbivoren,aantalCarnivoren,aantalMensen));
+			} else {
+				session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
+			}
+
 		}
 		terrarium = (Terrarium) session.getAttribute("terrarium");
 		String volgendeDag = request.getParameter("volgendeDag");

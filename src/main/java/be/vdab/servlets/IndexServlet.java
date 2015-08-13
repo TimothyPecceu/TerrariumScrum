@@ -59,8 +59,23 @@ public class IndexServlet extends HttpServlet {
 			request.setAttribute("fouten", fouten);
 			request.getRequestDispatcher(VIEW).forward(request, response);
 		} else {
-			String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte;
-			response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
+			if (request.getParameter("aantalPlanten") != null && request.getParameter("aantalHerbivoren") != null
+					&& request.getParameter("aantalCarnivoren") != null
+					&& request.getParameter("aantalMensen") != null) {
+				int aantalPlanten = Integer.parseInt(request.getParameter("aantalPlanten"));
+				int aantalHerbivoren = Integer.parseInt(request.getParameter("aantalHerbivoren"));
+				int aantalCarnivoren = Integer.parseInt(request.getParameter("aantalCarnivoren"));
+				int aantalMensen = Integer.parseInt(request.getParameter("aantalMensen"));
+				String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte + "&aantalPlanten=" + aantalPlanten
+						+ "&aantalHerbivoren=" + aantalHerbivoren + "&aantalCarnivoren=" + aantalCarnivoren
+						+ "&aantalMensen=" + aantalMensen;
+				response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
+			} else {
+				String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte;
+				response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
+
+			}
+
 		}
 	}
 

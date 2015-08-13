@@ -16,7 +16,7 @@ public class Terrarium {
 	private boolean vol;
 	private int hoogte;
 	private int breedte;
-	int aantal;
+	int aantal,aantalPlanten,aantalHerbivoren,aantalCarnivoren,aantalMensen;
 
 	public Terrarium(int hoogte, int breedte) {
 		terrarium = new HashMap<>();
@@ -53,6 +53,40 @@ public class Terrarium {
 			vol = true;
 		}
 
+	}
+	
+	public Terrarium( int hoogte, int breedte, int aantalPlanten, int aantalHerbivoren, int aantalCarnivoren, int aantalMensen){
+		terrarium = new HashMap<>();
+		this.hoogte = hoogte;
+		this.breedte = breedte;
+		this.aantalPlanten=aantalPlanten;
+		this.aantalHerbivoren=aantalHerbivoren;
+		this.aantalCarnivoren=aantalCarnivoren;
+		this.aantalMensen=aantalMensen;
+		dag = 1;
+		vol = false;
+
+		
+		try {
+			
+			for (int i = 0; i != aantalPlanten; i++) {
+				organismeToevoegen(new Plant(this));
+			}
+			
+			for (int i = 0; i != aantalHerbivoren; i++) {
+				organismeToevoegen(new Herbivoor(this));
+			}
+			
+			for (int i = 0; i != aantalCarnivoren; i++) {
+				organismeToevoegen(new Carnivoor(this));
+			}
+			
+			for (int i = 0; i != aantalMensen; i++) {
+				organismeToevoegen(new Mens(this));
+			}
+		} catch (IllegalArgumentException ex) {
+			vol = true;
+		}
 	}
 
 	public void volgendeDag() {

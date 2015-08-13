@@ -13,6 +13,10 @@
 	<form method="post">
 		<label><input type="number" name="breedte" placeholder="breedte" required autocomplete='off'/><span class='fout'>${fouten.breedte}</span></label><br>
 		 <label><input type="number" name="hoogte" placeholder="hoogte" required  autocomplete='off'/><span class='fout'>${fouten.hoogte}</span></label><br>
+		 <label><input type="number" name="aantalPlanten" placeholder="aantal Planten" required  autocomplete='off'/><span class='fout'>${fouten.planten}</span></label><br>
+		 <label><input type="number" name="aantalHerbivoren" placeholder="aantal Herbivoren" required  autocomplete='off'/><span class='fout'>${fouten.herbivoren}</span></label><br>
+		 <label><input type="number" name="aantalCarnivoren" placeholder="aantal Carnivoren" required  autocomplete='off'/><span class='fout'>${fouten.carnivoren}</span></label><br>
+		 <label><input type="number" name="aantalMensen" placeholder="aantal Mensen" required  autocomplete='off'/><span class='fout'>${fouten.mensen}</span></label><br>
 		<input type="submit" value="Maak terrarium"/>
 	</form>
 </body>
