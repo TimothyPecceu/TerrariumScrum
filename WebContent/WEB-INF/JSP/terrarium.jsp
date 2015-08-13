@@ -10,10 +10,9 @@
 <title>Terrarium</title>
 </head>
 <body>
-	<h1>Terrarium</h1>
-	<h2>Dag ${terrarium.dag}</h2>
+	<h1>Terrarium</h1>	
 	<form method="get">
-		<input type="submit" value="volgende dag" name="volgendeDag" />
+		<label><span class="dag">Dag ${terrarium.dag}</span><input type="submit" value="volgende dag" name="volgendeDag" id="volgendeDag"/></label>
 	</form>
 	<table>
 
@@ -25,11 +24,11 @@
 						<c:when test="${not empty organisme}">
 							<td><div class="image">
 							<c:choose>
-							<c:when test="${organisme.levenskracht >= 3}">
-								<img class='vak' src=<c:url value="/images/${organisme}2.png"/>>
-							</c:when>
 							<c:when test="${organisme.levenskracht >= 5}">
 								<img class='vak' src=<c:url value="/images/${organisme}3.png"/>>
+							</c:when>
+							<c:when test="${organisme.levenskracht >= 3}">
+								<img class='vak' src=<c:url value="/images/${organisme}2.png"/>>
 							</c:when>
 							<c:otherwise>
 								<img class='vak' src=<c:url value="/images/${organisme}1.png"/>>
