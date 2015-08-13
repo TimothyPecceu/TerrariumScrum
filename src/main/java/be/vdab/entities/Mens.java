@@ -24,18 +24,26 @@ public class Mens extends Dier{
 		Mens nieuweMens = new Mens(getTerrarium());
 		getTerrarium().organismeToevoegen(nieuweMens);
 	}
+	
+	private void mensVecht(Dier dier) {
+		if (this.getLevenskracht() != dier.getLevenskracht()) {
+			if (this.getLevenskracht() > dier.getLevenskracht()) {
+				this.verhoogLevenskracht(dier.getLevenskracht());
+				getTerrarium().organismeVerwijderen(dier.getPositie());
+			} else {
+				dier.verhoogLevenskracht(this.getLevenskracht());
+				getTerrarium().organismeVerwijderen(this.getPositie());
+			}
+		}
+	}
 
 	@Override
 	public void carnivoorInteractie(Carnivoor carnivoor) {
-		// TODO Auto-generated method stub
-		
+		mensVecht(carnivoor);		
 	}
 
 	@Override
-	public void herbivoorInteractie(Herbivoor herbivoor) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void herbivoorInteractie(Herbivoor herbivoor) {}
 
 	@Override
 	public void mensInteractie(Mens mens) {

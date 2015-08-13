@@ -19,25 +19,33 @@ public class Terrarium {
 	
 	public Terrarium(int hoogte, int breedte) {
 		terrarium = new HashMap<>();
-
-		int random = new Random().nextInt(3) + 1;
+		Terrarium.hoogte = hoogte;
+		Terrarium.breedte = breedte;
+		
+		int aantal= breedte*hoogte;
+		
+		int random = new Random().nextInt(aantal/12) + 1;
 		for (int i = 0; i != random; i++) {
 			organismeToevoegen(new Plant(this));
 		}
 
-		random = new Random().nextInt(3) + 1;
+		random = new Random().nextInt(aantal/12) + 1;
 		for (int i = 0; i != random; i++) {
 			organismeToevoegen(new Herbivoor(this));
 		}
 
-		random = new Random().nextInt(3) + 1;  
+		random = new Random().nextInt(aantal/12) + 1;  
 		for (int i = 0; i != random; i++) {
 			organismeToevoegen(new Carnivoor(this));
 		}
+		
+		random = new Random().nextInt(aantal/12) + 1;  
+		for (int i = 0; i != random; i++) {
+			organismeToevoegen(new Mens(this));
+		}
+		
 		dag = 1;
 		vol = false;
-		Terrarium.hoogte = hoogte;
-		Terrarium.breedte = breedte;
 	}	
 
 	public void volgendeDag() {

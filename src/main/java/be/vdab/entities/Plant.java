@@ -19,11 +19,16 @@ public class Plant extends Organisme {
 	}
 	
 	@Override
+	public void mensInteractie(Mens mens) {
+		wordGegeten(mens);
+	};
+	
+	@Override
 	public void actie(Organisme organisme){
 	}
 
-	private void wordGegeten(Herbivoor herbivoor) {
-		herbivoor.verhoogLevenskracht(1);
+	private void wordGegeten(Dier dier) {
+		dier.verhoogLevenskracht(1);
 		getTerrarium().organismeVerwijderen(this.getPositie());
 	}
 

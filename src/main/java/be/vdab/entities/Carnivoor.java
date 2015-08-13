@@ -21,13 +21,13 @@ public class Carnivoor extends Dier {
 		carnivoorVecht(carnivoor);
 	}
 
-	private void carnivoorVecht(Carnivoor carnivoor) {
-		if (this.getLevenskracht() != carnivoor.getLevenskracht()) {
-			if (this.getLevenskracht() > carnivoor.getLevenskracht()) {
-				this.verhoogLevenskracht(carnivoor.getLevenskracht());
-				getTerrarium().organismeVerwijderen(carnivoor.getPositie());
+	private void carnivoorVecht(Dier dier) {
+		if (this.getLevenskracht() != dier.getLevenskracht()) {
+			if (this.getLevenskracht() > dier.getLevenskracht()) {
+				this.verhoogLevenskracht(dier.getLevenskracht());
+				getTerrarium().organismeVerwijderen(dier.getPositie());
 			} else {
-				carnivoor.verhoogLevenskracht(this.getLevenskracht());
+				dier.verhoogLevenskracht(this.getLevenskracht());
 				getTerrarium().organismeVerwijderen(this.getPositie());
 			}
 		}
@@ -39,8 +39,7 @@ public class Carnivoor extends Dier {
 
 	@Override
 	public void mensInteractie(Mens mens) {
-		// TODO Auto-generated method stub
-		
+		carnivoorVecht(mens);	
 	}
 
 }

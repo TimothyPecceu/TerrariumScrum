@@ -22,8 +22,8 @@ public class Herbivoor extends Dier {
 			getTerrarium().organismeToevoegen(nieuweHerbivoor);
 	}
 
-	public void herbivoorWordtGegeten(Carnivoor carnivoor) {
-		carnivoor.verhoogLevenskracht(this.getLevenskracht());
+	public void herbivoorWordtGegeten(Dier dier) {
+		dier.verhoogLevenskracht(this.getLevenskracht());
 		getTerrarium().organismeVerwijderen(this.getPositie());
 	}
 
@@ -39,7 +39,6 @@ public class Herbivoor extends Dier {
 
 	@Override
 	public void mensInteractie(Mens mens) {
-		// TODO Auto-generated method stub
-		
+		herbivoorWordtGegeten(mens);	
 	}
 }
