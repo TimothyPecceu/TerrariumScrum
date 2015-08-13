@@ -25,10 +25,10 @@
 						<c:when test="${not empty organisme}">
 							<td><div class="image">
 							<c:choose>
-							<c:when test="${organisme.levenskracht > 3}">
+							<c:when test="${organisme.levenskracht >= 3}">
 								<img class='vak' src=<c:url value="/images/${organisme}2.png"/>>
 							</c:when>
-							<c:when test="${organisme.levenskracht > 5}">
+							<c:when test="${organisme.levenskracht >= 5}">
 								<img class='vak' src=<c:url value="/images/${organisme}3.png"/>>
 							</c:when>
 							<c:otherwise>
