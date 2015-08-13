@@ -1,6 +1,10 @@
 @CHARSET "utf-8";
 
-img {
+.vak {
 	width: 2em;
 	height:2em;
+}
+
+.fout{
+ 	color: red;
 }

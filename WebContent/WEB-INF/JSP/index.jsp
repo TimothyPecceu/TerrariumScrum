@@ -5,12 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel='stylesheet' href=<c:url value="/styles/default.css"/>>
 <title>Terrarium</title>
 </head>
 <body>
 	<img src=<c:url value="/images/introImage.jpg"/>>
 	<form method="post">
-		<input type="text" name="breedte" placeholder="breedte" required/> <input type="text" name="hoogte" placeholder="hoogte" required/>
+		<label><input type="number" name="breedte" placeholder="breedte" required/><span class='fout'>${fouten.breedte}</span></label><br>
+		 <label><input type="number" name="hoogte" placeholder="hoogte" required/><span class='fout'>${fouten.hoogte}</span></label><br>
 		<input type="submit" value="Maak terrarium"/>
 	</form>
 </body>

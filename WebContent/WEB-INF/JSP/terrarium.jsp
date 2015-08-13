@@ -13,31 +13,34 @@
 	<h1>Terrarium</h1>
 	<h2>Dag ${terrarium.dag}</h2>
 	<table>
+		<c:if test="${empty fouten}">
+			<c:forEach items="${terrarium.organismes}" var="organismes">
+				<tr>
+					<c:forEach items="${organismes}" var="organisme" varStatus="status">
 
-		<c:forEach items="${terrarium.organismes}" var="organismes">
-			<tr>
-				<c:forEach items="${organismes}" var="organisme" varStatus="status">
+						<c:choose>
+							<c:when test="${not empty organisme}">
+								<td><img class='vak' src=<c:url value="/images/${organisme}.png"/>></td>
+							</c:when>
+							<c:otherwise>
+								<td><img class='vak' src=<c:url value="/images/aarde.jpg"/>></td>
+							</c:otherwise>
+						</c:choose>
 
-					<c:choose>
-						<c:when test="${not empty organisme}">
-							<td><img src=<c:url value="/images/${organisme}.png"/>></td>
-						</c:when>
-						<c:otherwise>
-							<td><img src=<c:url value="/images/aarde.jpg"/>></td>
-						</c:otherwise>
-					</c:choose>
-
-				</c:forEach>
-			</tr>
-		</c:forEach>
+					</c:forEach>
+				</tr>
+			</c:forEach>
+		</c:if>
 	</table>
-	<form>
+	<form method="get">
 		<input type="submit" value="volgende dag" name="volgendeDag" />
 	</form>
 	<form method="post">
-		<input type="submit" value="Nieuw Terrarium">
-		<input type="text" name="breedte" placeholder="Breedte"/>
-		<input type="text" name="hoogte" placeholder="Hoogte"/>
+		<input type="submit" value="Nieuw Terrarium"> <label>
+			<input type="number" name="breedteNieuw" placeholder="Breedte"
+			required /><span>${fouten.breedte}</span>
+		</label> <label><input type="number" name="hoogteNieuw"
+			placeholder="Hoogte" required /><span>${fouten.hoogte}</span></label>
 	</form>
 </body>
 </html>

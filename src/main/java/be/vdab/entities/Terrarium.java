@@ -16,42 +16,49 @@ public class Terrarium {
 	private boolean vol;
 	private static int hoogte = 6;
 	private static int breedte = 6;
-	
+	int aantal;
+
 	public Terrarium(int hoogte, int breedte) {
 		terrarium = new HashMap<>();
 		Terrarium.hoogte = hoogte;
 		Terrarium.breedte = breedte;
-		
-		int aantal= breedte*hoogte;
-		
-		int random = new Random().nextInt(aantal/12) + 1;
-		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Plant(this));
-		}
-
-		random = new Random().nextInt(aantal/12) + 1;
-		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Herbivoor(this));
-		}
-
-		random = new Random().nextInt(aantal/12) + 1;  
-		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Carnivoor(this));
-		}
-		
-		random = new Random().nextInt(aantal/12) + 1;  
-		for (int i = 0; i != random; i++) {
-			organismeToevoegen(new Mens(this));
-		}
-		
 		dag = 1;
 		vol = false;
-	}	
+		aantal = breedte * hoogte;
+
+		if (aantal < 12) {
+			aantal = 12;
+		}
+		try {
+			int random = new Random().nextInt(aantal / 12) + 1;
+			for (int i = 0; i != random; i++) {
+				organismeToevoegen(new Plant(this));
+			}
+
+			random = new Random().nextInt(aantal / 12) + 1;
+			for (int i = 0; i != random; i++) {
+				organismeToevoegen(new Herbivoor(this));
+			}
+
+			random = new Random().nextInt(aantal / 12) + 1;
+			for (int i = 0; i != random; i++) {
+				organismeToevoegen(new Carnivoor(this));
+			}
+
+			random = new Random().nextInt(aantal / 12) + 1;
+			for (int i = 0; i != random; i++) {
+				organismeToevoegen(new Mens(this));
+			}
+		} catch (IllegalArgumentException ex) {
+			vol = true;
+		}
+
+	}
 
 	public void volgendeDag() {
 
 		for (Organisme organisme : getTerrarium()) {
-			if (organisme.getPositie().getxLocatie() < (breedte-1)) {
+			if (organisme.getPositie().getxLocatie() < (breedte - 1)) {
 				Positie pos = new Positie(organisme.getPositie().getyLocatie(),
 						organisme.getPositie().getxLocatie() + 1);
 				try {
@@ -61,7 +68,7 @@ public class Terrarium {
 				}
 			}
 		}
-		int random = new Random().nextInt(3) + 1;
+		int random = new Random().nextInt(aantal / 12) + 1;
 		for (int i = 0; i != random; i++) {
 			try {
 				organismeToevoegen(new Plant(this));
@@ -75,13 +82,13 @@ public class Terrarium {
 	public Set<Organisme> getTerrarium() {
 		return new HashSet<>(terrarium.values());
 	}
-	
-	public Map<Positie,Organisme> getTerrariumMap(){
+
+	public Map<Positie, Organisme> getTerrariumMap() {
 		return terrarium;
 	}
 
 	public void organismeToevoegen(Organisme organisme) {
-		if (getTerrarium().size() < (breedte*hoogte)) {
+		if (getTerrarium().size() < (breedte * hoogte)) {
 			if (terrarium.get(organisme.getPositie()) == null) {
 				terrarium.put(organisme.getPositie(), organisme);
 			} else {
@@ -110,13 +117,13 @@ public class Terrarium {
 	public boolean isLeeg(Positie positie) {
 		return !terrarium.containsKey(positie);
 	}
-	
+
 	public int getDag() {
 		return dag;
 	}
 
-	public Organisme[][] getOrganismes(){
-		Organisme[][] weergave = new Organisme[breedte][hoogte];
+	public Organisme[][] getOrganismes() {
+		Organisme[][] weergave = new Organisme[hoogte][breedte];
 		for (Entry<Positie, Organisme> entry : terrarium.entrySet()) {
 			weergave[entry.getKey().getyLocatie()][entry.getKey().getxLocatie()] = entry.getValue();
 		}
@@ -128,7 +135,7 @@ public class Terrarium {
 	}
 
 	public void printTerrarium() {
-		
+
 		Organisme[][] weergave = getOrganismes();
 		System.out.println("Dag: " + dag);
 		System.out.println("--------------------");
@@ -156,5 +163,5 @@ public class Terrarium {
 	public static int getBreedte() {
 		return breedte;
 	}
-	
+
 }
