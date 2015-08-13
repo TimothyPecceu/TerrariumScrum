@@ -55,7 +55,7 @@ public class Terrarium {
 
 	}
 	
-	public Terrarium( int hoogte, int breedte, int aantalPlanten, int aantalHerbivoren, int aantalCarnivoren, int aantalMensen){
+	public Terrarium(int hoogte, int breedte, int aantalPlanten, int aantalHerbivoren, int aantalCarnivoren, int aantalMensen){
 		terrarium = new HashMap<>();
 		this.hoogte = hoogte;
 		this.breedte = breedte;
@@ -65,7 +65,7 @@ public class Terrarium {
 		this.aantalMensen=aantalMensen;
 		dag = 1;
 		vol = false;
-
+		aantal = hoogte*breedte;
 		
 		try {
 			

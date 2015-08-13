@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import be.vdab.entities.Terrarium;
-
 /**
  * Servlet implementation class IndexServlet
  */
@@ -59,13 +57,15 @@ public class IndexServlet extends HttpServlet {
 			request.setAttribute("fouten", fouten);
 			request.getRequestDispatcher(VIEW).forward(request, response);
 		} else {
-			if (request.getParameter("aantalPlanten") != null && request.getParameter("aantalHerbivoren") != null
-					&& request.getParameter("aantalCarnivoren") != null
-					&& request.getParameter("aantalMensen") != null) {
-				int aantalPlanten = Integer.parseInt(request.getParameter("aantalPlanten"));
-				int aantalHerbivoren = Integer.parseInt(request.getParameter("aantalHerbivoren"));
-				int aantalCarnivoren = Integer.parseInt(request.getParameter("aantalCarnivoren"));
-				int aantalMensen = Integer.parseInt(request.getParameter("aantalMensen"));
+			String planten = request.getParameter("aantalPlanten");
+			String herbivoren = request.getParameter("aantalHerbivoren");
+			String carnivoren = request.getParameter("aantalCarnivoren");
+			String mensen = request.getParameter("aantalMensen");
+			if (!planten.isEmpty() && !herbivoren.isEmpty() && !carnivoren.isEmpty() && !mensen.isEmpty()) {
+				int aantalPlanten = Integer.parseInt(planten);
+				int aantalHerbivoren = Integer.parseInt(herbivoren);
+				int aantalCarnivoren = Integer.parseInt(carnivoren);
+				int aantalMensen = Integer.parseInt(mensen);
 				String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte + "&aantalPlanten=" + aantalPlanten
 						+ "&aantalHerbivoren=" + aantalHerbivoren + "&aantalCarnivoren=" + aantalCarnivoren
 						+ "&aantalMensen=" + aantalMensen;
