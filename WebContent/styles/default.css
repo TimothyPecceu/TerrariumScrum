@@ -17,10 +17,19 @@
 	left:0;
 	font-size: 1.25em;
 	font-weight:bold;
-	color:silver;
+	color:white;
+	text-shadow: 1px 1px 3px #000000;
 }
 .fout{
  	color: red;
+}
+
+.dag{
+	color:silver;
+	font-size:1.25em;
+	font-weight:bold;
+	text-shadow: 1px 1px 0px #10161C;
+	margin-right:1em;
 }
 
 body{
@@ -32,12 +41,21 @@ body{
 
 h1{
 	color: silver;
+	text-shadow: 1px 1px 0px #10161C;
 }
 
 input{
 	border-radius:35px;
 	padding: 0.25em;
 	margin-top: 0.5em;
+}
+
+input:focus{
+	outline: none;
+}
+
+table{
+	margin-top: 1em;
 }
 
 input[type="submit"]{
@@ -66,6 +84,7 @@ input[type="number"]{
 	-moz-border-radius: 35px; 
 	-webkit-border-radius: 35px; 
 	border: 2px inset #268A99;
+	-moz-appearance: textfield;
 
 }
 
@@ -74,22 +93,26 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
   	margin: 0; 
 }
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #D6D6D6;
-    text-align: center;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #D6D6D6;
-   opacity:  1;
-   text-align: center;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #D6D6D6;
-   opacity:  1;
-   text-align: center;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #D6D6D6;
-   text-align: center;
 
+
+input[type="number"]::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #D6D6D6;
+}
+
+input[type="number"]::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #D6D6D6;
+   opacity:  1;
+}
+input[type="number"]:-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #D6D6D6;
+   opacity:  1;
+}
+
+input[type="number"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #D6D6D6;
+}
+
+input[placeholder]{
+	color:    #D6D6D6;
+   opacity:  1;
 }
