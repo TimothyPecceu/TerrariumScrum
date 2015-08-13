@@ -15,7 +15,7 @@ public class CarnivoorTest {
 
 	@Before
 	public void before() {
-		terrarium = new Terrarium();
+		terrarium = new Terrarium(6,6);
 		carnivoorLinks = new Carnivoor(terrarium);		
 		terrarium.organismeToevoegen(carnivoorLinks);
 	}

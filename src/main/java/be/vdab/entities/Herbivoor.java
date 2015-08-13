@@ -17,7 +17,7 @@ public class Herbivoor extends Dier {
 		}
 	}
 
-	private void herbivoorVrijtHerbivoor(Herbivoor herbivoor) {	
+	private void herbivoorVrijtHerbivoor() {	
 			Herbivoor nieuweHerbivoor = new Herbivoor(getTerrarium());
 			getTerrarium().organismeToevoegen(nieuweHerbivoor);
 	}
@@ -34,6 +34,12 @@ public class Herbivoor extends Dier {
 
 	@Override
 	public void herbivoorInteractie(Herbivoor herbivoor) {
-		herbivoorVrijtHerbivoor(herbivoor);
+		herbivoorVrijtHerbivoor();
+	}
+
+	@Override
+	public void mensInteractie(Mens mens) {
+		// TODO Auto-generated method stub
+		
 	}
 }

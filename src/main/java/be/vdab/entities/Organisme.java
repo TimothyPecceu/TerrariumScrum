@@ -22,6 +22,9 @@ public abstract class Organisme {
 
 	public abstract void herbivoorInteractie(Herbivoor herbivoor);
 	
+	public abstract void mensInteractie(Mens mens);
+	
+	
 	@Override
 	public String toString(){
 		return this.getClass().getSimpleName();

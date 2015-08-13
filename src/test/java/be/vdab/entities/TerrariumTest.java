@@ -11,7 +11,7 @@ public class TerrariumTest {
 
 	@Before
 	public void before() {
-		terrarium = new Terrarium();
+		terrarium = new Terrarium(6,6);
 	}
 
 	@Test

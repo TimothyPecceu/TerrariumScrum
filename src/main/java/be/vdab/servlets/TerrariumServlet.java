@@ -27,17 +27,34 @@ public class TerrariumServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		int hoogte = 0;
+		int breedte = 0;
+		
 		HttpSession session = request.getSession();
+		if (request.getParameter("hoogte") != null) {
+			hoogte = Integer.parseInt(request.getParameter("hoogte"));
+		}
+		if (request.getParameter("breedte") != null) {
+			breedte = Integer.parseInt(request.getParameter("breedte"));
+		}
 		if (session.getAttribute("terrarium") == null) {
-			session.setAttribute("terrarium", new Terrarium());
+			session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
 		}
 		terrarium = (Terrarium) session.getAttribute("terrarium");
-
-		request.setAttribute("terrarium", terrarium.getTerrariumMap());
 		String volgendeDag = request.getParameter("volgendeDag");
-		terrarium.volgendeDag();
-		request.setAttribute("terrarium", terrarium.getTerrariumMap());
+		if (volgendeDag != null) {
+			terrarium.volgendeDag();
+		}
+		request.setAttribute("terrarium", terrarium);
 		request.getRequestDispatcher(VIEW).forward(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		response.sendRedirect(response.encodeRedirectURL(request.getRequestURI()));
 	}
 
 }

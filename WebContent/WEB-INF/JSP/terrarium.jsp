@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8" session="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,12 +11,33 @@
 </head>
 <body>
 	<h1>Terrarium</h1>
-	
-	<c:forEach items="${terrarium}" var="entry">
-		Key = ${entry.key.xLocatie}, <img src=<c:url value="/images/${entry.value}.png" /> title="${entry.value}"/><br>
-	</c:forEach>
+	<h2>Dag ${terrarium.dag}</h2>
+	<table>
+
+		<c:forEach items="${terrarium.organismes}" var="organismes">
+			<tr>
+				<c:forEach items="${organismes}" var="organisme" varStatus="status">
+
+					<c:choose>
+						<c:when test="${not empty organisme}">
+							<td><img src=<c:url value="/images/${organisme}.png"/>></td>
+						</c:when>
+						<c:otherwise>
+							<td><img src=<c:url value="/images/aarde.jpg"/>></td>
+						</c:otherwise>
+					</c:choose>
+
+				</c:forEach>
+			</tr>
+		</c:forEach>
+	</table>
 	<form>
 		<input type="submit" value="volgende dag" name="volgendeDag" />
+	</form>
+	<form method="post">
+		<input type="submit" value="Nieuw Terrarium">
+		<input type="text" name="breedte" placeholder="Breedte"/>
+		<input type="text" name="hoogte" placeholder="Hoogte"/>
 	</form>
 </body>
 </html>
