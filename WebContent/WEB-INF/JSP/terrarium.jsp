@@ -37,7 +37,7 @@
 
 	</table>
 	<form method="get">
-		<input type="submit" value="volgende dag" name="volgendeDag" />
+		<input class='btn' type="submit" value="volgende dag" name="volgendeDag" />
 	</form>
 	<form method="post">
 
@@ -46,7 +46,7 @@
 			class='fout'>${fouten.breedte}</span>
 		</label><br> <label><input type="number" name="hoogteNieuw"
 			placeholder="Hoogte" required autocomplete='off' /><span class='fout'>${fouten.hoogte}</span></label><br>
-		<input type="submit" value="Nieuw Terrarium">
+		<input class='btn' type="submit" value="Nieuw Terrarium">
 	</form>
 </body>
 </html>
