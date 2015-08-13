@@ -26,8 +26,8 @@ public class Terrarium {
 		vol = false;
 		aantal = breedte * hoogte;
 
-		if (aantal < 12) {
-			aantal = 12;
+		if (aantal < 10) {
+			aantal = 10;
 		}
 		try {
 			int random = new Random().nextInt(aantal / 10) + 1;
@@ -65,8 +65,11 @@ public class Terrarium {
 		this.aantalMensen=aantalMensen;
 		dag = 1;
 		vol = false;
-		aantal = hoogte*breedte;
 		
+		aantal = breedte*hoogte;
+		if (aantal < 10) {
+			aantal = 10;
+		}
 		try {
 			
 			for (int i = 0; i != aantalPlanten; i++) {
