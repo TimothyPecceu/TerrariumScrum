@@ -17,29 +17,29 @@ public abstract class Dier extends Organisme {
 
 	public void stap() {
 		Richting[] alleRichtingen = Richting.values();
-		Positie positie = new Positie(this.getPositie().getyLocatie(), this.getPositie().getxLocatie());
+		Positie positie = new Positie(this.getPositie().getyLocatie(), this.getPositie().getxLocatie(),this.getTerrarium());
 		Terrarium terrarium = getTerrarium();
 		
 		while (positie.equals(getPositie())){
 			Richting randomRichting = alleRichtingen[new Random().nextInt(alleRichtingen.length)];
 			switch (randomRichting) {
 			case OMHOOG:
-				if((positie.getyLocatie()>0) && terrarium.isLeeg(new Positie(positie.getyLocatie()-1, positie.getxLocatie()))){
+				if((positie.getyLocatie()>0) && terrarium.isLeeg(new Positie(positie.getyLocatie()-1, positie.getxLocatie(),this.getTerrarium()))){
 					positie.setyLocatie(positie.getyLocatie() - 1);
 				}	
 				break;
 			case OMLAAG:
-				if((positie.getyLocatie()<Terrarium.getHoogte()-1) && terrarium.isLeeg(new Positie(positie.getyLocatie()+1, positie.getxLocatie()))){
+				if((positie.getyLocatie()<this.getTerrarium().getHoogte()-1) && terrarium.isLeeg(new Positie(positie.getyLocatie()+1, positie.getxLocatie(),this.getTerrarium()))){
 					positie.setyLocatie(positie.getyLocatie() + 1);
 				}
 				break;
 			case LINKS:
-				if((positie.getxLocatie()>0)&& terrarium.isLeeg(new Positie(positie.getyLocatie(), positie.getxLocatie()-1))){
+				if((positie.getxLocatie()>0)&& terrarium.isLeeg(new Positie(positie.getyLocatie(), positie.getxLocatie()-1,this.getTerrarium()))){
 					positie.setxLocatie(positie.getxLocatie() - 1);
 				}
 				break;
 			case RECHTS:
-				if((positie.getxLocatie()<Terrarium.getBreedte()-1)&& terrarium.isLeeg(new Positie(positie.getyLocatie(), positie.getxLocatie()+1))){
+				if((positie.getxLocatie()<this.getTerrarium().getBreedte()-1)&& terrarium.isLeeg(new Positie(positie.getyLocatie(), positie.getxLocatie()+1,this.getTerrarium()))){
 					positie.setxLocatie(positie.getxLocatie() + 1);
 				}
 				break;

@@ -7,7 +7,7 @@ public class Mens extends Dier{
 	
 	public Mens (Terrarium terrarium){
 		setTerrarium(terrarium);
-		setPositie(new Positie());
+		setPositie(new Positie(terrarium));
 	}
 
 	@Override

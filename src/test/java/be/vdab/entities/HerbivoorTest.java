@@ -65,7 +65,7 @@ public class HerbivoorTest {
 	
 	@Test
 	public void herbivoorTegenRandGaatNietOutOfBounds(){
-		Positie positieHerbivoor = new Positie(0, 0);
+		Positie positieHerbivoor = new Positie(0, 0,terrarium);
 		herbivoorLinks.setPositie(positieHerbivoor);
 		int originelePositie = (positieHerbivoor.getxLocatie() + positieHerbivoor.getyLocatie())%2;
 		herbivoorLinks.actie(null);

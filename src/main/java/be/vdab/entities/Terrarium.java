@@ -14,14 +14,14 @@ public class Terrarium {
 	private Map<Positie, Organisme> terrarium;
 	private int dag;
 	private boolean vol;
-	private static int hoogte = 6;
-	private static int breedte = 6;
+	private int hoogte;
+	private int breedte;
 	int aantal;
 
 	public Terrarium(int hoogte, int breedte) {
 		terrarium = new HashMap<>();
-		Terrarium.hoogte = hoogte;
-		Terrarium.breedte = breedte;
+		this.hoogte = hoogte;
+		this.breedte = breedte;
 		dag = 1;
 		vol = false;
 		aantal = breedte * hoogte;
@@ -60,7 +60,7 @@ public class Terrarium {
 		for (Organisme organisme : getTerrarium()) {
 			if (organisme.getPositie().getxLocatie() < (breedte - 1)) {
 				Positie pos = new Positie(organisme.getPositie().getyLocatie(),
-						organisme.getPositie().getxLocatie() + 1);
+						organisme.getPositie().getxLocatie() + 1, this);
 				try {
 					organisme.actie(terrarium.get(pos));
 				} catch (IllegalArgumentException ex) {
@@ -93,7 +93,7 @@ public class Terrarium {
 				terrarium.put(organisme.getPositie(), organisme);
 			} else {
 				while (!isLeeg(organisme.getPositie())) {
-					organisme.setPositie(new Positie());
+					organisme.setPositie(new Positie(this));
 				}
 				terrarium.put(organisme.getPositie(), organisme);
 			}
@@ -156,11 +156,11 @@ public class Terrarium {
 		System.out.println("--------------------");
 	}
 
-	public static int getHoogte() {
+	public int getHoogte() {
 		return hoogte;
 	}
 
-	public static int getBreedte() {
+	public int getBreedte() {
 		return breedte;
 	}
 

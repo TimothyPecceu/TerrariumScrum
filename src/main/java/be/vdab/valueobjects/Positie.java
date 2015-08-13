@@ -7,7 +7,12 @@ import be.vdab.entities.Terrarium;
 public class Positie {
 	
 	private int xLocatie,yLocatie;
+	private Terrarium terrarium;
 	
+	public Terrarium getTerrarium() {
+		return terrarium;
+	}
+
 	public int getxLocatie(){
 		return xLocatie;
 	}
@@ -24,16 +29,17 @@ public class Positie {
 		return yLocatie;
 	}
 	
-	public Positie(int yLocatie,int xLocatie){
-		if (xLocatie<0||xLocatie>Terrarium.getBreedte()-1||yLocatie<0||yLocatie>Terrarium.getHoogte()-1){
+	public Positie(int yLocatie,int xLocatie,Terrarium terrarium){
+		if (xLocatie<0||xLocatie>terrarium.getBreedte()-1||yLocatie<0||yLocatie>terrarium.getHoogte()-1){
 			throw new IllegalArgumentException();
 		}
 		this.xLocatie = xLocatie;
 		this.yLocatie= yLocatie;
+		this.terrarium= terrarium;
 		}
 	
-	public Positie(){
-		this(new Random().nextInt(Terrarium.getHoogte()), new Random().nextInt(Terrarium.getBreedte()));
+	public Positie(Terrarium terrarium){
+		this(new Random().nextInt(terrarium.getHoogte()), new Random().nextInt(terrarium.getBreedte()),terrarium);
 	}
 
 	@Override

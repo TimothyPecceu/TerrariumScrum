@@ -6,7 +6,7 @@ public class Plant extends Organisme {
 
 	public Plant(Terrarium terrarium){
 		setTerrarium(terrarium);
-		setPositie(new Positie());
+		setPositie(new Positie(terrarium));
 	}
 	
 	@Override

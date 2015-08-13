@@ -6,7 +6,7 @@ public class Carnivoor extends Dier {
 
 	public Carnivoor(Terrarium terrarium) {
 		setTerrarium(terrarium);
-		setPositie(new Positie());
+		setPositie(new Positie(terrarium));
 	}
 
 	public void actie(Organisme organisme) {

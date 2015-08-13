@@ -19,7 +19,7 @@
 
 		<c:forEach items="${terrarium.organismes}" var="organismes">
 			<tr>
-				<c:forEach items="${organismes}" var="organisme" varStatus="status">
+				<c:forEach items="${organismes}" var="organisme">
 
 					<c:choose>
 						<c:when test="${not empty organisme}">

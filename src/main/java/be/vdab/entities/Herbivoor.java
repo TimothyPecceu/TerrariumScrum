@@ -6,7 +6,7 @@ public class Herbivoor extends Dier {
 
 	public Herbivoor(Terrarium terrarium) {
 		setTerrarium(terrarium);
-		setPositie(new Positie());
+		setPositie(new Positie(terrarium));
 	}
 
 	public void actie(Organisme organisme) {
