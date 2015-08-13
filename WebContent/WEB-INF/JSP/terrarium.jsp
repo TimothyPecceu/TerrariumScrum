@@ -13,34 +13,40 @@
 	<h1>Terrarium</h1>
 	<h2>Dag ${terrarium.dag}</h2>
 	<table>
-		<c:if test="${empty fouten}">
-			<c:forEach items="${terrarium.organismes}" var="organismes">
-				<tr>
-					<c:forEach items="${organismes}" var="organisme" varStatus="status">
 
-						<c:choose>
-							<c:when test="${not empty organisme}">
-								<td><img class='vak' src=<c:url value="/images/${organisme}.png"/>></td>
-							</c:when>
-							<c:otherwise>
-								<td><img class='vak' src=<c:url value="/images/aarde.jpg"/>></td>
-							</c:otherwise>
-						</c:choose>
+		<c:forEach items="${terrarium.organismes}" var="organismes">
+			<tr>
+				<c:forEach items="${organismes}" var="organisme" varStatus="status">
 
-					</c:forEach>
-				</tr>
-			</c:forEach>
-		</c:if>
+					<c:choose>
+						<c:when test="${not empty organisme}">
+							<td><div class="image"><img class='vak'
+								src=<c:url value="/images/${organisme}.png"/>>
+								<c:if test="${organisme.levenskracht > 0}">
+								<span class='levenskracht'><c:out value="${organisme.levenskracht}"/></span>
+								</c:if></div></td>
+						</c:when>
+						<c:otherwise>
+							<td><img class='vak' src=<c:url value="/images/aarde.jpg"/>></td>
+						</c:otherwise>
+					</c:choose>
+
+				</c:forEach>
+			</tr>	
+		</c:forEach>
+
 	</table>
 	<form method="get">
 		<input type="submit" value="volgende dag" name="volgendeDag" />
 	</form>
 	<form method="post">
-		<input type="submit" value="Nieuw Terrarium"> <label>
-			<input type="number" name="breedteNieuw" placeholder="Breedte"
-			required /><span>${fouten.breedte}</span>
-		</label> <label><input type="number" name="hoogteNieuw"
-			placeholder="Hoogte" required /><span>${fouten.hoogte}</span></label>
+
+		<label> <input type="number" name="breedteNieuw"
+			placeholder="Breedte" required autocomplete='off' /><span
+			class='fout'>${fouten.breedte}</span>
+		</label><br> <label><input type="number" name="hoogteNieuw"
+			placeholder="Hoogte" required autocomplete='off' /><span class='fout'>${fouten.hoogte}</span></label><br>
+		<input type="submit" value="Nieuw Terrarium">
 	</form>
 </body>
 </html>

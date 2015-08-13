@@ -1,10 +1,39 @@
 @CHARSET "utf-8";
 
 .vak {
-	width: 2em;
-	height:2em;
+	width: 3em;
+	height:3em;
 }
 
+.image{
+	position:relative;
+	width: 3em;
+	height:3em;
+}
+
+.levenskracht{
+	position:absolute;
+	top:1.5em;
+	left:0;
+	font-size: 1.25em;
+	font-weight:bold;
+	color:silver;
+}
 .fout{
  	color: red;
+}
+
+body{
+	background-color: #A67C00;
+	margin: 0 auto;
+	width: 80%;
+	font-family: sans-serif;
+}
+
+h1{
+	color: silver;
+}
+
+input[type="number"]{
+	border-radius:20% 20% 10% 10%;
 }

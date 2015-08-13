@@ -16,6 +16,8 @@ public abstract class Organisme {
 		this.positie = positie;
 	}
 	
+	public abstract int getLevenskracht();
+	
 	public abstract void actie(Organisme organisme);
 	
 	public abstract void carnivoorInteractie(Carnivoor carnivoor);

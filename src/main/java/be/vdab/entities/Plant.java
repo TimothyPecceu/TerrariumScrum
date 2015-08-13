@@ -32,4 +32,8 @@ public class Plant extends Organisme {
 		getTerrarium().organismeVerwijderen(this.getPositie());
 	}
 
+	@Override
+	public int getLevenskracht(){
+		return 0;
+	}
 }

@@ -32,24 +32,34 @@ public class IndexServlet extends HttpServlet {
 		int breedte = 0;
 		Map<String, String> fouten = new HashMap<>();
 		if (request.getParameter("hoogte") != null) {
-
-			hoogte = Integer.parseInt(request.getParameter("hoogte"));
-			if (hoogte < 1) {
-				fouten.put("hoogte", "Getal moet minimum 1 zijn");
+			try {
+				hoogte = Integer.parseInt(request.getParameter("hoogte"));
+			} catch (NumberFormatException ex) {
+				fouten.put("hoogte", "Geef een positief getal in");
 			}
+			if (hoogte < 1) {
+				fouten.put("hoogte", "Geef een positief getal in");
+			}
+		} else {
+			fouten.put("hoogte", "Geef een positief getal in");
 		}
 		if (request.getParameter("breedte") != null) {
-			breedte = Integer.parseInt(request.getParameter("breedte"));
-			if (breedte < 1) {
-				fouten.put("breedte", "Getal moet minimum 1 zijn");
+			try {
+				breedte = Integer.parseInt(request.getParameter("breedte"));
+			} catch (NumberFormatException ex) {
+				fouten.put("breedte", "Geef een positief getal in");
 			}
+			if (breedte < 1) {
+				fouten.put("breedte", "Geef een positief getal in");
+			}
+		} else {
+			fouten.put("breedte", "Geef een positief getal in");
 		}
 		if (!fouten.isEmpty()) {
 			request.setAttribute("fouten", fouten);
 			request.getRequestDispatcher(VIEW).forward(request, response);
 		} else {
-			String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte="
-					+ breedte;
+			String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte;
 			response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
 		}
 	}

@@ -7,7 +7,7 @@ import be.vdab.valueobjects.Richting;
 
 public abstract class Dier extends Organisme {
 
-	private int levenskracht;
+	private int levenskracht = 1;
 
 	public abstract void actie(Organisme organisme);
 

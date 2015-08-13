@@ -30,22 +30,22 @@ public class Terrarium {
 			aantal = 12;
 		}
 		try {
-			int random = new Random().nextInt(aantal / 12) + 1;
+			int random = new Random().nextInt(aantal / 10) + 1;
 			for (int i = 0; i != random; i++) {
 				organismeToevoegen(new Plant(this));
 			}
 
-			random = new Random().nextInt(aantal / 12) + 1;
+			random = new Random().nextInt(aantal / 10) + 1;
 			for (int i = 0; i != random; i++) {
 				organismeToevoegen(new Herbivoor(this));
 			}
 
-			random = new Random().nextInt(aantal / 12) + 1;
+			random = new Random().nextInt(aantal / 10) + 1;
 			for (int i = 0; i != random; i++) {
 				organismeToevoegen(new Carnivoor(this));
 			}
 
-			random = new Random().nextInt(aantal / 12) + 1;
+			random = new Random().nextInt(aantal / 10) + 1;
 			for (int i = 0; i != random; i++) {
 				organismeToevoegen(new Mens(this));
 			}
@@ -68,7 +68,7 @@ public class Terrarium {
 				}
 			}
 		}
-		int random = new Random().nextInt(aantal / 12) + 1;
+		int random = new Random().nextInt(aantal / 10) + 1;
 		for (int i = 0; i != random; i++) {
 			try {
 				organismeToevoegen(new Plant(this));

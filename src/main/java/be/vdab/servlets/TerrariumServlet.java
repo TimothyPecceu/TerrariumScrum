@@ -30,31 +30,11 @@ public class TerrariumServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int hoogte = 0;
-		int breedte = 0;
-
-		Map<String, String> fouten = new HashMap<>();
 		HttpSession session = request.getSession();
 		if (session.getAttribute("terrarium") == null) {
-			if (request.getParameter("hoogte") != null) {
-
-				hoogte = Integer.parseInt(request.getParameter("hoogte"));
-				if (hoogte < 1) {
-					fouten.put("hoogte", "Getal moet minimum 1 zijn");
-				}
-			}
-			if (request.getParameter("breedte") != null) {
-				breedte = Integer.parseInt(request.getParameter("breedte"));
-				if (breedte < 1) {
-					fouten.put("breedte", "Getal moet minimum 1 zijn");
-				}
-			}
-			if (fouten.isEmpty()) {
-				session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
-			} else {
-				request.setAttribute("fouten", fouten);
-				request.getRequestDispatcher(VIEW).forward(request, response);
-			}
+			int breedte = Integer.parseInt(request.getParameter("breedte"));
+			int hoogte = Integer.parseInt(request.getParameter("hoogte"));
+			session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
 		}
 		terrarium = (Terrarium) session.getAttribute("terrarium");
 		String volgendeDag = request.getParameter("volgendeDag");
@@ -68,12 +48,47 @@ public class TerrariumServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int hoogte = 0;
+		int breedte = 0;
 		HttpSession session = request.getSession();
-		session.removeAttribute("terrarium");
-		int breedte = Integer.parseInt(request.getParameter("breedteNieuw"));
-		int hoogte = Integer.parseInt(request.getParameter("hoogteNieuw"));
-		session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
-		response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath())));
+
+		Map<String, String> fouten = new HashMap<>();
+
+		if (request.getParameter("hoogteNieuw") != null) {
+
+			try {
+				hoogte = Integer.parseInt(request.getParameter("hoogteNieuw"));
+			} catch (NumberFormatException ex) {
+				fouten.put("hoogte", "Geef een positief getal in");
+			}
+			if (hoogte < 1) {
+				fouten.put("hoogte", "Geef een positief getal in");
+			}
+		} else {
+			fouten.put("hoogte", "Geef een positief getal in");
+		}
+		if (request.getParameter("breedteNieuw") != null) {
+			try {
+				breedte = Integer.parseInt(request.getParameter("breedteNieuw"));
+			} catch (NumberFormatException ex) {
+				fouten.put("breedte", "Geef een positief getal in");
+			}
+			if (breedte < 1) {
+				fouten.put("breedte", "Geef een positief getal in");
+			}
+		} else {
+			fouten.put("breedte", "Geef een positief getal in");
+		}
+		if (fouten.isEmpty()) {
+			session.removeAttribute("terrarium");
+			session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
+			response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath())));
+		} else {
+			request.setAttribute("fouten", fouten);
+			terrarium = (Terrarium) session.getAttribute("terrarium");
+			request.setAttribute("terrarium", session.getAttribute("terrarium"));
+			request.getRequestDispatcher(VIEW).forward(request, response);
+		}
 	}
 
 }
