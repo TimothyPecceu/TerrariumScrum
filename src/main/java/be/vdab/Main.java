@@ -7,7 +7,7 @@ import be.vdab.entities.Terrarium;
 public class Main {
 
 	public static void main(String[] args) {
-		Terrarium terrarium = new Terrarium();		
+		Terrarium terrarium = new Terrarium(6,6);		
 		terrarium.printTerrarium();
 		Scanner scanner = new Scanner(System.in);
 		String input = scanner.nextLine();
