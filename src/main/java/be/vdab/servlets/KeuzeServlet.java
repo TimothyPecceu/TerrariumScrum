@@ -99,15 +99,29 @@ public class KeuzeServlet extends HttpServlet {
 					int aantalHerbivoren = Integer.parseInt(herbivoren);
 					int aantalCarnivoren = Integer.parseInt(carnivoren);
 					int aantalMensen = Integer.parseInt(mensen);
-					if (aantalPlanten > 0 && aantalHerbivoren > 0 && aantalCarnivoren > 0 && aantalMensen > 0) {
-						String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte + "&aantalPlanten="
-								+ aantalPlanten + "&aantalHerbivoren=" + aantalHerbivoren + "&aantalCarnivoren="
-								+ aantalCarnivoren + "&aantalMensen=" + aantalMensen;
-						response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
+					int totaalAantalOrganismen = aantalPlanten + aantalHerbivoren + aantalCarnivoren + aantalMensen;
+					int aantal = hoogte * breedte - ((hoogte*breedte)-terrarium.getAanvaardePosities().size());
+					if (aantal >= totaalAantalOrganismen) {
+						if (aantalPlanten > 0 && aantalHerbivoren > 0 && aantalCarnivoren > 0 && aantalMensen > 0) {
+							String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte + "&aantalPlanten="
+									+ aantalPlanten + "&aantalHerbivoren=" + aantalHerbivoren + "&aantalCarnivoren="
+									+ aantalCarnivoren + "&aantalMensen=" + aantalMensen;
+							response.sendRedirect(
+									response.encodeRedirectURL(String.format(URL, request.getContextPath())));
+						} 
+					} else {
+						fouten.put("totaalOverschreden", "Totaal aantal overschreden");
+						request.setAttribute("fouten", fouten);
+						terrarium = (Terrarium) session.getAttribute("terrarium");
+						request.setAttribute("terrarium", session.getAttribute("terrarium"));
+						request.setAttribute("checked", "checked");
+						request.getRequestDispatcher(VIEW).forward(request, response);
 					}
-
 				} else {
 					request.setAttribute("fouten", fouten);
+					terrarium = (Terrarium) session.getAttribute("terrarium");
+					request.setAttribute("terrarium", session.getAttribute("terrarium"));
+					request.setAttribute("checked", "checked");
 					request.getRequestDispatcher(VIEW).forward(request, response);
 
 				}

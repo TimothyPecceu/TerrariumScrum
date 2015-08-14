@@ -37,6 +37,7 @@
 		<label class='optie'><input type="number" name="aantalMensen"
 			placeholder="aantal Mensen" autocomplete='off' /><span class='fout'>${fouten.mensen}</span></label>
 		<input type="submit" value="Maak terrarium" />
+		<label class="optie">${fouten.totaalOverschreden}</label>
 	</form>
 </body>
 <script>
