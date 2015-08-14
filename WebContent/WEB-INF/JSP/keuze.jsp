@@ -15,7 +15,7 @@
 			<c:forEach items="${terrarium.organismes}" var="organismes" varStatus="y">
 				<tr>
 					<c:forEach items="${organismes}" var="organisme" varStatus="x">
-						<td class='vak' background=<c:url value="/images/aarde.jpg"/>><input type="checkbox" checked="checked" name="posities" value="${y.index},${x.index}"></td>
+						<td class='vak' background=<c:url value="/images/aarde.jpg"/>><input type="checkbox" checked="checked" id='${y.index},${x.index}' name="posities" value="${y.index},${x.index}" /><label for='${y.index},${x.index}'></label></td>
 					</c:forEach>
 				</tr>
 			</c:forEach>
