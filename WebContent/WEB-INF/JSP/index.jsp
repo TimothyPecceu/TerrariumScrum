@@ -31,21 +31,4 @@
 		<input type="submit" value="Maak terrarium" />
 	</form>
 </body>
-<script>
-	var optieTextboxes = document.getElementsByClassName('optie'), i;
-	for (var i = 0; i < optieTextboxes.length; i++) {
-		optieTextboxes[i].style.visibility = 'hidden';
-	}
-	document.getElementById("opties").onchange = function() {
-		if (document.getElementById("opties").checked) {
-			for (var i = 0; i < optieTextboxes.length; i++) {
-				optieTextboxes[i].style.visibility = 'visible';
-			}
-		} else {
-			for (var i = 0; i < optieTextboxes.length; i++) {
-				optieTextboxes[i].style.visibility = 'hidden';
-			}
-		}
-	};
-</script>
 </html>
