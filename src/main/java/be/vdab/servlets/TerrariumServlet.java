@@ -20,7 +20,7 @@ import be.vdab.entities.Terrarium;
 public class TerrariumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/terrarium.jsp";
-	private static final String REDIRECT_URL = "%s/terrarium.htm";
+	private static final String REDIRECT_URL = "%s/keuze.htm";
 	private static Terrarium terrarium;
 
 	/**
@@ -31,26 +31,24 @@ public class TerrariumServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		if (session.getAttribute("terrarium") == null) {
-			int breedte = Integer.parseInt(request.getParameter("breedte"));
-			int hoogte = Integer.parseInt(request.getParameter("hoogte"));
-			if (request.getParameter("aantalPlanten") != null && request.getParameter("aantalHerbivoren") != null
-					&& request.getParameter("aantalCarnivoren") != null
-					&& request.getParameter("aantalMensen") != null) {				
-				int aantalPlanten = Integer.parseInt(request.getParameter("aantalPlanten"));
-				int aantalHerbivoren = Integer.parseInt(request.getParameter("aantalHerbivoren"));
-				int aantalCarnivoren = Integer.parseInt(request.getParameter("aantalCarnivoren"));
-				int aantalMensen = Integer.parseInt(request.getParameter("aantalMensen"));
-				session.setAttribute("terrarium", new Terrarium(hoogte, breedte, aantalPlanten,aantalHerbivoren,aantalCarnivoren,aantalMensen));
-			} else {
-				session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
-			}
-
-		}
 		terrarium = (Terrarium) session.getAttribute("terrarium");
 		String volgendeDag = request.getParameter("volgendeDag");
 		if (volgendeDag != null) {
 			terrarium.volgendeDag();
+		} else {
+			if (request.getParameter("aantalPlanten") != null && request.getParameter("aantalHerbivoren") != null
+					&& request.getParameter("aantalCarnivoren") != null
+					&& request.getParameter("aantalMensen") != null) {
+				int aantalPlanten = Integer.parseInt(request.getParameter("aantalPlanten"));
+				int aantalHerbivoren = Integer.parseInt(request.getParameter("aantalHerbivoren"));
+				int aantalCarnivoren = Integer.parseInt(request.getParameter("aantalCarnivoren"));
+				int aantalMensen = Integer.parseInt(request.getParameter("aantalMensen"));
+
+				terrarium.setOrganismes(aantalPlanten, aantalHerbivoren, aantalCarnivoren, aantalMensen);
+				session.setAttribute("terrarium", terrarium);
+			} else {
+				terrarium.setRandomOrganismes();
+			}
 		}
 		request.setAttribute("terrarium", terrarium);
 		request.getRequestDispatcher(VIEW).forward(request, response);
@@ -92,8 +90,8 @@ public class TerrariumServlet extends HttpServlet {
 		}
 		if (fouten.isEmpty()) {
 			session.removeAttribute("terrarium");
-			session.setAttribute("terrarium", new Terrarium(hoogte, breedte));
-			response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath())));
+			String URL = REDIRECT_URL + "?hoogte=" + hoogte + "&breedte=" + breedte;
+			response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
 		} else {
 			request.setAttribute("fouten", fouten);
 			terrarium = (Terrarium) session.getAttribute("terrarium");

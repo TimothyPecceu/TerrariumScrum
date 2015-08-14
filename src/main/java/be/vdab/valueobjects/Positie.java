@@ -8,6 +8,11 @@ public class Positie {
 	
 	private int xLocatie,yLocatie;
 	private Terrarium terrarium;
+
+	public boolean isAanvaard() {
+		return terrarium.isAanvaard(this);
+	}
+
 	
 	public Terrarium getTerrarium() {
 		return terrarium;

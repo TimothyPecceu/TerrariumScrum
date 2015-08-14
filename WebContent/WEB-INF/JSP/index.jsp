@@ -15,37 +15,8 @@
 			placeholder="breedte" required autocomplete='off' /><span
 			class='fout'>${fouten.breedte}</span></label><br> <label><input
 			type="number" name="hoogte" placeholder="hoogte" required
-			autocomplete='off' /><span class='fout'>${fouten.hoogte}</span></label><br>
-		<label><input type="checkbox" id="opties" />geavanceerde
-			opties</label><br> <label><input type="number" class="optie"
-			name="aantalPlanten" placeholder="aantal Planten" autocomplete='off' /><span
-			class='fout'>${fouten.planten}</span></label><br> <label><input
-			type="number" class="optie" name="aantalHerbivoren"
-			placeholder="aantal Herbivoren" autocomplete='off' /><span
-			class='fout'>${fouten.herbivoren}</span></label><br> <label><input
-			type="number" class="optie" name="aantalCarnivoren"
-			placeholder="aantal Carnivoren" autocomplete='off' /><span
-			class='fout'>${fouten.carnivoren}</span></label><br> <label><input
-			type="number" class="optie" name="aantalMensen"
-			placeholder="aantal Mensen" autocomplete='off' /><span class='fout'>${fouten.mensen}</span></label><br>
+			autocomplete='off' /><span class='fout'>${fouten.hoogte}</span></label><br>		
 		<input type="submit" value="Maak terrarium" />
 	</form>
 </body>
-<script>
-	var optieTextboxes = document.getElementsByClassName('optie'), i;
-	for (var i = 0; i < optieTextboxes.length; i++) {
-		optieTextboxes[i].style.visibility = 'hidden';
-	}
-	document.getElementById("opties").onchange = function() {
-		if (document.getElementById("opties").checked) {
-			for (var i = 0; i < optieTextboxes.length; i++) {
-				optieTextboxes[i].style.visibility = 'visible';
-			}
-		} else {
-			for (var i = 0; i < optieTextboxes.length; i++) {
-				optieTextboxes[i].style.visibility = 'hidden';
-			}
-		}
-	};
-</script>
 </html>
