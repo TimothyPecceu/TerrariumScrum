@@ -20,17 +20,29 @@
 				</tr>
 			</c:forEach>
 		</table>
-
-		<label><input type="number" name="aantalPlanten"
-			placeholder="aantal Planten" autocomplete='off' /><span class='fout'>${fouten.planten}</span></label><br>
-		<label><input type="number" name="aantalHerbivoren"
-			placeholder="aantal Herbivoren" autocomplete='off' /><span
-			class='fout'>${fouten.herbivoren}</span></label><br> <label><input
-			type="number" name="aantalCarnivoren" placeholder="aantal Carnivoren"
-			autocomplete='off' /><span class='fout'>${fouten.carnivoren}</span></label><br>
-		<label><input type="number" name="aantalMensen"
-			placeholder="aantal Mensen" autocomplete='off' /><span class='fout'>${fouten.mensen}</span></label><br>
+		<label><input type="checkbox" id="opties">Geavanceerde opties</label><br> 
+		<label class='optie'><input type="number" name="aantalPlanten"  placeholder="aantal Planten" autocomplete='off' /><span class='fout'>${fouten.planten}</span></label>
+		<label class='optie'><input type="number" name="aantalHerbivoren" placeholder="aantal Herbivoren" autocomplete='off' /><span class='fout'>${fouten.herbivoren}</span></label> 
+		<label class='optie'><input type="number" name="aantalCarnivoren" placeholder="aantal Carnivoren" autocomplete='off' /><span class='fout'>${fouten.carnivoren}</span></label>
+		<label class='optie'><input type="number" name="aantalMensen" placeholder="aantal Mensen" autocomplete='off' /><span class='fout'>${fouten.mensen}</span></label>
 		<input type="submit" value="Maak terrarium" />
 	</form>
 </body>
+<script>
+	var optieTextboxes = document.getElementsByClassName('optie'), i;
+	for (var i = 0; i < optieTextboxes.length; i++) {
+		optieTextboxes[i].style.display = 'none';
+	}
+	document.getElementById("opties").onchange = function() {
+		if (document.getElementById("opties").checked) {
+			for (var i = 0; i < optieTextboxes.length; i++) {
+				optieTextboxes[i].style.display = 'block';
+			}
+		} else {
+			for (var i = 0; i < optieTextboxes.length; i++) {
+				optieTextboxes[i].style.display = 'none';
+			}
+		}
+	};
+</script>
 </html>
