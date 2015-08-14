@@ -20,7 +20,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<label><input type="checkbox" id="opties">Geavanceerde opties</label><br> 
+		<label><input type="checkbox" id="opties" name="opties">Geavanceerde opties</label><br> 
 		<label class='optie'><input type="number" name="aantalPlanten"  placeholder="aantal Planten" autocomplete='off' /><span class='fout'>${fouten.planten}</span></label>
 		<label class='optie'><input type="number" name="aantalHerbivoren" placeholder="aantal Herbivoren" autocomplete='off' /><span class='fout'>${fouten.herbivoren}</span></label> 
 		<label class='optie'><input type="number" name="aantalCarnivoren" placeholder="aantal Carnivoren" autocomplete='off' /><span class='fout'>${fouten.carnivoren}</span></label>
