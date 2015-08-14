@@ -25,7 +25,7 @@
 			</c:forEach>
 		</table>
 		<label><input type="checkbox" id="opties" name="opties"
-			checked="${checked}">Geavanceerde opties</label><br> <label
+			${checked}>Geavanceerde opties</label><br> <label
 			class='optie'><input type="number" name="aantalPlanten"
 			placeholder="aantal Planten" autocomplete='off' /><span class='fout'>${fouten.planten}</span></label>
 		<label class='optie'><input type="number"
