@@ -56,6 +56,12 @@ input:focus{
 
 table{
 	margin-top: 1em;
+	border-color: black;
+	border-width: thin;
+}
+
+.terrarium{
+	border-collapse:collapse;
 }
 
 input[type="submit"]{

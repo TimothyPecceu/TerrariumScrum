@@ -16,7 +16,7 @@
 			type="submit" value="volgende dag" name="volgendeDag"
 			id="volgendeDag" /></label>
 	</form>
-	<table>
+	<table class='terrarium'>
 		<c:forEach items="${terrarium.organismes}" var="organismes"
 			varStatus="y">
 			<tr>
