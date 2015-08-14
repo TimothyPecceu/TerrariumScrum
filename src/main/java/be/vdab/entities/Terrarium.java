@@ -1,7 +1,9 @@
 package be.vdab.entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -16,7 +18,41 @@ public class Terrarium {
 	private boolean vol;
 	private int hoogte;
 	private int breedte;
-	int aantal,aantalPlanten,aantalHerbivoren,aantalCarnivoren,aantalMensen;
+	private int aantal, aantalPlanten, aantalHerbivoren, aantalCarnivoren, aantalMensen;
+	private List<Positie> aanvaardePosities;
+	
+
+	public List<Positie> getAanvaardePosities() {
+		return aanvaardePosities;
+	}
+
+	public void setAanvaardePosities(List<Positie> aanvaardePosities) {		
+		this.aanvaardePosities = aanvaardePosities;
+	}
+
+	public boolean isVol() {
+		return vol;
+	}
+
+	public int getAantal() {
+		return aantal;
+	}
+
+	public int getAantalPlanten() {
+		return aantalPlanten;
+	}
+
+	public int getAantalHerbivoren() {
+		return aantalHerbivoren;
+	}
+
+	public int getAantalCarnivoren() {
+		return aantalCarnivoren;
+	}
+
+	public int getAantalMensen() {
+		return aantalMensen;
+	}
 
 	public Terrarium(int hoogte, int breedte) {
 		terrarium = new HashMap<>();
@@ -25,7 +61,36 @@ public class Terrarium {
 		dag = 1;
 		vol = false;
 		aantal = breedte * hoogte;
+		aanvaardePosities = new ArrayList<>();
+	}
 
+	public void volgendeDag() {
+
+		for (Organisme organisme : getTerrarium()) {
+			if (organisme.getPositie().getxLocatie() < (breedte - 1)) {
+				Positie pos = new Positie(organisme.getPositie().getyLocatie(),
+						organisme.getPositie().getxLocatie() + 1, this);
+				if (isAanvaard(pos)) {
+					try {
+						organisme.actie(terrarium.get(pos));
+					} catch (IllegalArgumentException ex) {
+						vol = true;
+					}
+				}
+			}
+		}
+		int random = new Random().nextInt(aantal / 10) + 1;
+		for (int i = 0; i != random; i++) {
+			try {
+				organismeToevoegen(new Plant(this));
+			} catch (IllegalArgumentException ex) {
+				vol = true;
+			}
+		}
+		dag++;
+	}
+
+	public void setRandomOrganismes() {
 		if (aantal < 10) {
 			aantal = 10;
 		}
@@ -52,68 +117,29 @@ public class Terrarium {
 		} catch (IllegalArgumentException ex) {
 			vol = true;
 		}
-
 	}
-	
-	public Terrarium(int hoogte, int breedte, int aantalPlanten, int aantalHerbivoren, int aantalCarnivoren, int aantalMensen){
-		terrarium = new HashMap<>();
-		this.hoogte = hoogte;
-		this.breedte = breedte;
-		this.aantalPlanten=aantalPlanten;
-		this.aantalHerbivoren=aantalHerbivoren;
-		this.aantalCarnivoren=aantalCarnivoren;
-		this.aantalMensen=aantalMensen;
-		dag = 1;
-		vol = false;
-		
-		aantal = breedte*hoogte;
-		if (aantal < 10) {
-			aantal = 10;
-		}
+
+	public void setOrganismes(int aantalPlanten, int aantalHerbivoren, int aantalCarnivoren, int aantalMensen) {
 		try {
-			
+
 			for (int i = 0; i != aantalPlanten; i++) {
 				organismeToevoegen(new Plant(this));
 			}
-			
+
 			for (int i = 0; i != aantalHerbivoren; i++) {
 				organismeToevoegen(new Herbivoor(this));
 			}
-			
+
 			for (int i = 0; i != aantalCarnivoren; i++) {
 				organismeToevoegen(new Carnivoor(this));
 			}
-			
+
 			for (int i = 0; i != aantalMensen; i++) {
 				organismeToevoegen(new Mens(this));
 			}
 		} catch (IllegalArgumentException ex) {
 			vol = true;
 		}
-	}
-
-	public void volgendeDag() {
-
-		for (Organisme organisme : getTerrarium()) {
-			if (organisme.getPositie().getxLocatie() < (breedte - 1)) {
-				Positie pos = new Positie(organisme.getPositie().getyLocatie(),
-						organisme.getPositie().getxLocatie() + 1, this);
-				try {
-					organisme.actie(terrarium.get(pos));
-				} catch (IllegalArgumentException ex) {
-					vol = true;
-				}
-			}
-		}
-		int random = new Random().nextInt(aantal / 10) + 1;
-		for (int i = 0; i != random; i++) {
-			try {
-				organismeToevoegen(new Plant(this));
-			} catch (IllegalArgumentException ex) {
-				vol = true;
-			}
-		}
-		dag++;
 	}
 
 	public Set<Organisme> getTerrarium() {
@@ -125,15 +151,11 @@ public class Terrarium {
 	}
 
 	public void organismeToevoegen(Organisme organisme) {
-		if (getTerrarium().size() < (breedte * hoogte)) {
-			if (terrarium.get(organisme.getPositie()) == null) {
-				terrarium.put(organisme.getPositie(), organisme);
-			} else {
-				while (!isLeeg(organisme.getPositie())) {
-					organisme.setPositie(new Positie(this));
-				}
-				terrarium.put(organisme.getPositie(), organisme);
+		if (getTerrarium().size() < (aanvaardePosities.size())) {
+			while(!isAanvaard(organisme.getPositie())||!isLeeg(organisme.getPositie())){
+				organisme.setPositie(new Positie(this));
 			}
+			terrarium.put(organisme.getPositie(), organisme);
 		} else {
 			throw new IllegalArgumentException();
 
@@ -200,5 +222,12 @@ public class Terrarium {
 	public int getBreedte() {
 		return breedte;
 	}
-
+	
+	public boolean isAanvaard(Positie positie){
+		return aanvaardePosities.contains(positie);
+	}
+	
+	public boolean isCoordinatenAanvaard(int yLocatie, int xLocatie){
+		return aanvaardePosities.contains(new Positie(yLocatie,xLocatie,this));
+	}
 }

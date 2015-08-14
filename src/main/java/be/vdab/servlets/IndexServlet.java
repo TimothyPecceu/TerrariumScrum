@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/index.jsp";
-	private static final String REDIRECT = "%s/terrarium.htm";
+	private static final String REDIRECT = "%s/keuze.htm";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -57,24 +57,8 @@ public class IndexServlet extends HttpServlet {
 			request.setAttribute("fouten", fouten);
 			request.getRequestDispatcher(VIEW).forward(request, response);
 		} else {
-			String planten = request.getParameter("aantalPlanten");
-			String herbivoren = request.getParameter("aantalHerbivoren");
-			String carnivoren = request.getParameter("aantalCarnivoren");
-			String mensen = request.getParameter("aantalMensen");
-			if (!planten.isEmpty() && !herbivoren.isEmpty() && !carnivoren.isEmpty() && !mensen.isEmpty()) {
-				int aantalPlanten = Integer.parseInt(planten);
-				int aantalHerbivoren = Integer.parseInt(herbivoren);
-				int aantalCarnivoren = Integer.parseInt(carnivoren);
-				int aantalMensen = Integer.parseInt(mensen);
-				String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte + "&aantalPlanten=" + aantalPlanten
-						+ "&aantalHerbivoren=" + aantalHerbivoren + "&aantalCarnivoren=" + aantalCarnivoren
-						+ "&aantalMensen=" + aantalMensen;
-				response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
-			} else {
-				String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte;
-				response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
-
-			}
+			String URL = REDIRECT + "?hoogte=" + hoogte + "&breedte=" + breedte;
+			response.sendRedirect(response.encodeRedirectURL(String.format(URL, request.getContextPath())));
 
 		}
 	}

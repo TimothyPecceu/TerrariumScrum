@@ -7,7 +7,7 @@ import be.vdab.valueobjects.Richting;
 
 public abstract class Dier extends Organisme {
 
-	private int levenskracht = 1;
+	private int levenskracht = 0;
 
 	public abstract void actie(Organisme organisme);
 
@@ -19,27 +19,32 @@ public abstract class Dier extends Organisme {
 		Richting[] alleRichtingen = Richting.values();
 		Positie positie = new Positie(this.getPositie().getyLocatie(), this.getPositie().getxLocatie(),this.getTerrarium());
 		Terrarium terrarium = getTerrarium();
+		Positie nieuwePositie = null;
 		
 		while (positie.equals(getPositie())){
 			Richting randomRichting = alleRichtingen[new Random().nextInt(alleRichtingen.length)];
 			switch (randomRichting) {
 			case OMHOOG:
-				if((positie.getyLocatie()>0) && terrarium.isLeeg(new Positie(positie.getyLocatie()-1, positie.getxLocatie(),this.getTerrarium()))){
+				nieuwePositie = new Positie(positie.getyLocatie()-1, positie.getxLocatie(),this.getTerrarium());
+				if(terrarium.isAanvaard(nieuwePositie) && terrarium.isLeeg(nieuwePositie)){
 					positie.setyLocatie(positie.getyLocatie() - 1);
 				}	
 				break;
 			case OMLAAG:
-				if((positie.getyLocatie()<this.getTerrarium().getHoogte()-1) && terrarium.isLeeg(new Positie(positie.getyLocatie()+1, positie.getxLocatie(),this.getTerrarium()))){
+				nieuwePositie =new Positie(positie.getyLocatie()+1, positie.getxLocatie(),this.getTerrarium());
+				if(terrarium.isAanvaard(nieuwePositie) && terrarium.isLeeg(nieuwePositie)){
 					positie.setyLocatie(positie.getyLocatie() + 1);
 				}
 				break;
 			case LINKS:
-				if((positie.getxLocatie()>0)&& terrarium.isLeeg(new Positie(positie.getyLocatie(), positie.getxLocatie()-1,this.getTerrarium()))){
+				nieuwePositie =new Positie(positie.getyLocatie(), positie.getxLocatie()-1,this.getTerrarium());
+				if(terrarium.isAanvaard(nieuwePositie) && terrarium.isLeeg(nieuwePositie)){
 					positie.setxLocatie(positie.getxLocatie() - 1);
 				}
 				break;
 			case RECHTS:
-				if((positie.getxLocatie()<this.getTerrarium().getBreedte()-1)&& terrarium.isLeeg(new Positie(positie.getyLocatie(), positie.getxLocatie()+1,this.getTerrarium()))){
+				nieuwePositie =new Positie(positie.getyLocatie(), positie.getxLocatie()+1,this.getTerrarium());
+				if(terrarium.isAanvaard(nieuwePositie) && terrarium.isLeeg(nieuwePositie)){
 					positie.setxLocatie(positie.getxLocatie() + 1);
 				}
 				break;
